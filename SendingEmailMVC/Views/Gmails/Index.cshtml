@@ -1,0 +1,67 @@
+﻿@model SendingEmailMVC.Models.Gmail
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+        @*<strong>Danger!</strong> Indicates a dangerous or potentially negative action.*@
+        <p>@ViewBag.Message</p>
+    </div>
+}
+<style>
+    .editor-field textarea {
+        width : 400px;
+        height : 100px;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>E-mail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subjects, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subjects, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subjects, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group editor-field">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", @style="width:400px;" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Send Email" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
