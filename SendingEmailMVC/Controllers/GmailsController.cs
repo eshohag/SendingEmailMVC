@@ -21,7 +21,7 @@ namespace SendingEmailMVC.Controllers
             string message = String.Empty;
             try
             {
-                MailMessage aMailMessage = new MailMessage("shohagmiaiiuc@gmail.com", aGmail.To);
+                MailMessage aMailMessage = new MailMessage("youremailaddress@gmail.com", aGmail.To);
                 aMailMessage.Subject = aGmail.Subjects;
                 aMailMessage.Body = aGmail.Body;
                 aMailMessage.IsBodyHtml = false;
@@ -32,7 +32,7 @@ namespace SendingEmailMVC.Controllers
                 aClient.Port = 587;
                 aClient.EnableSsl = true;
 
-                NetworkCredential aCredential = new NetworkCredential("shohagmiaiiuc@gmail.com", "Shohag1994");
+                NetworkCredential aCredential = new NetworkCredential("youremailaddress@gmail.com", "YourPassword");
                 aClient.UseDefaultCredentials = true;
                 aClient.Credentials = aCredential;
                 aClient.Send(aMailMessage);
